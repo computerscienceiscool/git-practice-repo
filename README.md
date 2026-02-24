@@ -1,20 +1,10 @@
-# Git Branching, Merging & Internals — Practice Repo
+# Git for Teams — Practice Repo
 
 ## What This Is
 
-This is a hands-on practice repo covering Git branching, merging, and internals.
-It is NOT a general Git workshop. It focuses specifically on these topics:
-
-1. **Branches and Merging** — creating branches, fast-forward vs merge commit
-2. **Merge Conflicts** — what causes them, how to resolve them manually
-3. **Git Internals (.git/refs)** — what branches actually are under the hood
-4. **Difftool and Mergetool** — visual tools for comparing and resolving
-5. **Fetch vs Pull vs Merge** — working with remote repos and teammates
-6. **Rebase** — the other way to combine branches, when to use it vs merge
-7. **Git Stash** — temporarily shelving uncommitted work
-8. **Branch Management** — deleting, renaming, cleaning up
-9. **Git Log Tricks** — useful commands for inspecting history
-10. **Full Team Workflow** — a realistic scenario putting it all together
+A hands-on practice repo for teams transitioning from solo Git usage to
+working together on shared repositories. The workshop covers what you need
+to know when your code starts colliding with other people's code.
 
 ## Prerequisites
 
@@ -23,38 +13,29 @@ You should already be comfortable with:
 - Basic command line navigation
 - Editing files with vim or any text editor
 
-## Ordering
+## The Workshop (30 minutes)
 
-Each exercise works inside this repo and cleans up after itself, so most
-can be done independently. However, some build on earlier concepts:
+These three exercises are the core workshop. Do them in order:
 
-**Do these first (in order):**
-- 01 Branches and Merging — foundation for everything
-- 02 Merge Conflicts — builds on 01
+1. **[Branches and Merging](exercises/01-branches-and-merging/WALKTHROUGH.md)** — Everyone works on their own branch so you don't step on each other
+2. **[Merge Conflicts](exercises/02-merge-conflicts/WALKTHROUGH.md)** — When you DO step on each other, here's how to fix it without panicking
+3. **[Fetch vs Pull vs Merge](exercises/05-fetch-pull-merge/WALKTHROUGH.md)** — Your coworker pushed code. Now what?
 
-**These require earlier knowledge:**
-- 03 Git Internals — makes more sense after 01
-- 06 Rebase — requires understanding merge commits from 01-02
-- 10 Full Workflow — uses everything, do this LAST
+## Continue Learning
 
-**These can be done in any order (after 01-02):**
-- 04 Difftool and Mergetool
-- 05 Fetch vs Pull vs Merge
-- 07 Git Stash
-- 08 Branch Management
-- 09 Git Log Tricks
+These exercises are available for self-study after the workshop. Each one is
+self-contained with its own walkthrough, commands, and cleanup steps.
 
-## How To Use This
+**Recommended after the workshop:**
+- 03 [Git Internals (.git/refs)](exercises/03-git-internals/WALKTHROUGH.md) — What branches actually are under the hood
+- 10 [Full Team Workflow](exercises/10-full-team-workflow/WALKTHROUGH.md) — A realistic scenario putting it all together (do this last)
 
-Each exercise folder has a single **WALKTHROUGH.md** file. It contains:
-- A plain-English explanation of the concept
-- Why it matters in real life
-- Exact commands to run, with expected output
-- Explanations of what each command does and WHY
-- "Test Yourself" questions to make sure it stuck
-- Cleanup steps so your repo stays tidy
-
-**Do them in order. Type the commands yourself — don't copy-paste.**
+**In any order:**
+- 04 [Difftool and Mergetool](exercises/04-difftool-and-mergetool/WALKTHROUGH.md) — Visual tools for comparing and resolving
+- 06 [Rebase](exercises/06-rebase/WALKTHROUGH.md) — The other way to combine branches
+- 07 [Git Stash](exercises/07-git-stash/WALKTHROUGH.md) — Temporarily shelving uncommitted work
+- 08 [Branch Management](exercises/08-branch-management/WALKTHROUGH.md) — Deleting, renaming, cleaning up
+- 09 [Git Log Tricks](exercises/09-git-log-tricks/WALKTHROUGH.md) — Useful commands for inspecting history
 
 ## Quick Setup
 
@@ -70,7 +51,20 @@ Then open the first exercise and follow along:
 cd exercises/01-branches-and-merging/
 ```
 
+## How Each Exercise Works
+
+Each exercise folder has a single **WALKTHROUGH.md** file. It contains:
+- A plain-English explanation of the concept
+- Why it matters in real life
+- Exact commands to run, with expected output
+- Explanations of what each command does and WHY
+- "Test Yourself" questions to make sure it stuck
+- Cleanup steps so your repo stays tidy
+
+Every exercise creates its own `work/` directory so nothing interferes with
+the practice repo itself. Type the commands yourself — don't copy-paste.
+
 ## One Rule
 
-After every exercise, clean up your branches. A messy graph makes everything
-harder to understand. Each walkthrough includes cleanup steps — don't skip them.
+After every exercise, clean up. Each walkthrough includes cleanup steps at
+the end — don't skip them.
