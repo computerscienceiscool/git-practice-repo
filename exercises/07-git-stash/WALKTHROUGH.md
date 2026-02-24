@@ -37,12 +37,16 @@ Common situations:
 ## Setup
 
 ```bash
-mkdir ~/git-exercises/ex07
-cd ~/git-exercises/ex07
-git init
+cd ~/lab/git/git-practice-repo/exercises/07-git-stash/
+git status
+```
+
+```bash
 echo "original code" > app.txt
 git add app.txt
+git status
 git commit -m "initial commit"
+git status
 ```
 
 
@@ -72,6 +76,7 @@ Your boss says "check something on main right now." You're not ready to commit.
 
 ```bash
 git stash
+git status
 ```
 
 **What you'll see:**
@@ -115,7 +120,9 @@ With a clean working directory, you can now do whatever you need:
 # Simulate doing some urgent work
 echo "urgent hotfix" > hotfix.txt
 git add hotfix.txt
+git status
 git commit -m "emergency hotfix"
+git status
 ```
 
 Your urgent work is done. Now you want your half-finished feature back.
@@ -125,6 +132,7 @@ Your urgent work is done. Now you want your half-finished feature back.
 
 ```bash
 git stash pop
+git status
 ```
 
 **What you'll see:**
@@ -158,6 +166,7 @@ working on it.
 
 ```bash
 git checkout -- app.txt
+git status
 ```
 
 This throws away the uncommitted change (since we're just practicing).
@@ -176,34 +185,40 @@ echo "this should be on a feature branch" >> app.txt
 You realize you're on the wrong branch. Stash your work:
 ```bash
 git stash
+git status
 ```
 
 Create the correct branch and switch to it:
 ```bash
 git checkout -b correct-branch
+git status
 ```
 
 Pop the stash here:
 ```bash
 git stash pop
+git status
 ```
 
 Now your changes are on the correct branch:
 ```bash
-git status
 cat app.txt
 ```
 
 Your changes are here on `correct-branch`, not on main. Commit them:
 ```bash
 git add app.txt
+git status
 git commit -m "feature work on correct branch"
+git status
 ```
 
 **Clean up:**
 ```bash
 git checkout main
+git status
 git branch -d correct-branch
+git status
 ```
 
 
@@ -214,6 +229,7 @@ If you stash multiple times, it helps to label them:
 ```bash
 echo "login changes" >> app.txt
 git stash push -m "working on login"
+git status
 ```
 
 See your stash list:
@@ -231,7 +247,9 @@ The message helps you remember what's in the stash.
 Pop it:
 ```bash
 git stash pop
+git status
 git checkout -- app.txt
+git status
 ```
 
 
@@ -244,6 +262,7 @@ You're working on a feature:
 echo "new navigation bar code" >> app.txt
 echo "nav styles" > nav.css
 git add nav.css
+git status
 ```
 
 Notice: `app.txt` is modified but not staged. `nav.css` is staged but not
@@ -260,7 +279,9 @@ Do something urgent:
 ```bash
 echo "patch" > patch.txt
 git add patch.txt
+git status
 git commit -m "urgent patch"
+git status
 ```
 
 Get your work back:
@@ -276,7 +297,9 @@ back. Stash preserved the state of both files.
 ```bash
 git checkout -- app.txt
 git reset HEAD nav.css
+git status
 rm nav.css
+git status
 ```
 
 
@@ -320,6 +343,10 @@ The flow:
 ## Cleanup
 
 ```bash
-cd ~
-rm -rf ~/git-exercises/ex07
+git checkout main
+git status
+git reset --hard
+git status
+git clean -fd
+git status
 ```

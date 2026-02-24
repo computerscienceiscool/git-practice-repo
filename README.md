@@ -25,7 +25,7 @@ You should already be comfortable with:
 
 ## Ordering
 
-Each exercise creates its own fresh repo and cleans up after itself, so most
+Each exercise works inside this repo and cleans up after itself, so most
 can be done independently. However, some build on earlier concepts:
 
 **Do these first (in order):**
@@ -58,14 +58,16 @@ Each exercise folder has a single **WALKTHROUGH.md** file. It contains:
 
 ## Quick Setup
 
+Clone the repo and navigate to it:
+
 ```bash
-mkdir ~/git-exercises
-cd ~/git-exercises
+git clone https://github.com/computerscienceiscool/git-practice-repo.git
+cd git-practice-repo
 ```
 
 Then open the first exercise and follow along:
 ```
-exercises/01-branches-and-merging/WALKTHROUGH.md
+cd exercises/01-branches-and-merging/
 ```
 
 ## One Rule

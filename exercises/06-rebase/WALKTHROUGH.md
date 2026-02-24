@@ -40,12 +40,16 @@ But rebase has a rule you must follow. We'll get to that.
 ## Setup
 
 ```bash
-mkdir ~/git-exercises/ex06
-cd ~/git-exercises/ex06
-git init
+cd ~/lab/git/git-practice-repo/exercises/06-rebase/
+git status
+```
+
+```bash
 echo "base content" > base.txt
 git add base.txt
+git status
 git commit -m "initial commit"
+git status
 ```
 
 
@@ -53,16 +57,22 @@ git commit -m "initial commit"
 
 ```bash
 git checkout -b feature
+git status
 echo "feature work" > feature.txt
 git add feature.txt
+git status
 git commit -m "feature commit"
+git status
 ```
 
 ```bash
 git checkout main
+git status
 echo "main moved forward" > main-new.txt
 git add main-new.txt
+git status
 git commit -m "main moved forward"
+git status
 ```
 
 Check the graph:
@@ -92,7 +102,9 @@ So you need to be on YOUR branch.
 
 ```bash
 git checkout feature
+git status
 git rebase main
+git status
 ```
 
 **What you'll see:**
@@ -132,7 +144,9 @@ This is important and it's the source of the big safety rule.
 Now switch to main and merge:
 ```bash
 git checkout main
+git status
 git merge feature
+git status
 ```
 
 **What you'll see:**
@@ -159,6 +173,7 @@ Completely straight line. Both branches at the same spot.
 **Clean up:**
 ```bash
 git branch -d feature
+git status
 ```
 
 
@@ -168,30 +183,46 @@ Repetition is how this sticks. Do it again:
 
 ```bash
 git checkout -b feature-two
+git status
 echo "feature two work" > f2.txt
 git add f2.txt
+git status
 git commit -m "feature two commit"
+git status
 
 git checkout main
+git status
 echo "more main work" > main2.txt
 git add main2.txt
+git status
 git commit -m "more main work"
+git status
 ```
 
 Check the graph — you should see a fork.
+```bash
+git log --oneline --all --graph
+```
 
 Now rebase:
 ```bash
 git checkout feature-two
+git status
 git rebase main
+git status
 ```
 
 Check the graph — fork should be gone, straight line.
+```bash
+git log --oneline --all --graph
+```
 
 Merge:
 ```bash
 git checkout main
+git status
 git merge feature-two
+git status
 ```
 
 Should say fast-forward.
@@ -199,6 +230,7 @@ Should say fast-forward.
 **Clean up:**
 ```bash
 git branch -d feature-two
+git status
 ```
 
 
@@ -265,6 +297,10 @@ reviewing it — use merge, not rebase.
 ## Cleanup
 
 ```bash
-cd ~
-rm -rf ~/git-exercises/ex06
+git checkout main
+git status
+git reset --hard
+git status
+git clean -fd
+git status
 ```

@@ -18,9 +18,8 @@ pick what you want to keep.
 ## Setup
 
 ```bash
-mkdir ~/git-exercises/ex02
-cd ~/git-exercises/ex02
-git init
+cd ~/lab/git/git-practice-repo/exercises/02-merge-conflicts/
+git status
 ```
 
 
@@ -29,7 +28,9 @@ git init
 ```bash
 echo "line one - original" > shared.txt
 git add shared.txt
+git status
 git commit -m "add shared file"
+git status
 ```
 
 This file now exists on `main`. It's the common starting point.
@@ -39,9 +40,12 @@ This file now exists on `main`. It's the common starting point.
 
 ```bash
 git checkout -b branch-a
+git status
 echo "line one - edited by branch-a" > shared.txt
 git add shared.txt
+git status
 git commit -m "branch-a edits shared.txt"
+git status
 ```
 
 You've changed the same line on `branch-a`.
@@ -51,9 +55,12 @@ You've changed the same line on `branch-a`.
 
 ```bash
 git checkout main
+git status
 echo "line one - edited by main" > shared.txt
 git add shared.txt
+git status
 git commit -m "main edits shared.txt"
+git status
 ```
 
 Now both branches have changed the same line in the same file. The stage is set
@@ -156,19 +163,19 @@ To resolve it, you edit the file. Remove ALL the markers (`<<<<<<<`, `=======`,
 
 You have three choices:
 
-**Choice A — Keep main's version:**
+**Choice A -- Keep main's version:**
 Edit the file so it contains only:
 ```
 line one - edited by main
 ```
 
-**Choice B — Keep branch-a's version:**
+**Choice B -- Keep branch-a's version:**
 Edit the file so it contains only:
 ```
 line one - edited by branch-a
 ```
 
-**Choice C — Combine them or write something new:**
+**Choice C -- Combine them or write something new:**
 Edit the file so it contains whatever you want:
 ```
 line one - edited by both branches
@@ -191,7 +198,9 @@ version you prefer, save and exit (`:wq` in vim).
 After editing the file, tell Git you've resolved it:
 ```bash
 git add shared.txt
+git status
 git commit -m "resolve merge conflict"
+git status
 ```
 
 That's it. Conflict resolved. The merge is complete.
@@ -205,7 +214,7 @@ git log --oneline --all --graph
 your merge commit at the top.
 
 
-## Step 8: Practice — Another Conflict
+## Step 8: Practice -- Another Conflict
 
 Let's do it again to build muscle memory. Clean up first:
 ```bash
@@ -216,28 +225,37 @@ Create a multi-line file this time:
 ```bash
 printf "line one\nline two\nline three\n" > multi.txt
 git add multi.txt
+git status
 git commit -m "add multi-line file"
+git status
 ```
 
 Create a branch that edits line two:
 ```bash
 git checkout -b branch-b
+git status
 printf "line one\nline two CHANGED BY BRANCH-B\nline three\n" > multi.txt
 git add multi.txt
+git status
 git commit -m "branch-b changes line two"
+git status
 ```
 
 Go to main and edit line two differently:
 ```bash
 git checkout main
+git status
 printf "line one\nline two CHANGED BY MAIN\nline three\n" > multi.txt
 git add multi.txt
+git status
 git commit -m "main changes line two"
+git status
 ```
 
 Merge:
 ```bash
 git merge branch-b
+git status
 ```
 
 You'll get a conflict. Resolve it the same way:
@@ -245,7 +263,9 @@ You'll get a conflict. Resolve it the same way:
 2. Remove the markers
 3. Keep what you want
 4. `git add multi.txt`
-5. `git commit -m "resolve second conflict"`
+5. `git status`
+6. `git commit -m "resolve second conflict"`
+7. `git status`
 
 Clean up:
 ```bash
@@ -260,6 +280,7 @@ right now," you can undo the whole thing:
 
 ```bash
 git merge --abort
+git status
 ```
 
 This takes you back to before the merge started. Nothing changed. You can try
@@ -298,6 +319,9 @@ again later when you're ready.
 ## Cleanup
 
 ```bash
-cd ~
-rm -rf ~/git-exercises/ex02
+git checkout main
+git status
+git reset --hard
+git clean -fd
+git status
 ```

@@ -23,11 +23,12 @@ You work on a team. The project is a simple web app. You need to:
 
 ## Setup — Create the Team Environment
 
+```bash
+cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/
+```
+
 ### The Remote (shared server)
 ```bash
-mkdir -p ~/git-exercises/ex10
-cd ~/git-exercises/ex10
-
 mkdir remote
 cd remote
 git init --bare
@@ -39,20 +40,28 @@ cd ..
 mkdir my-repo
 cd my-repo
 git init
+git status
+
 git remote add origin ../remote
 
 echo "<!DOCTYPE html><html><body><h1>App</h1></body></html>" > index.html
 echo "body { font-family: sans-serif; }" > styles.css
 echo "console.log('app started');" > app.js
 git add .
+git status
+
 git commit -m "initial project setup"
+git status
+
 git push origin main
+git status
 cd ..
 ```
 
 ### Coworker's Repo
 ```bash
 git clone remote coworker-repo
+git status
 cd ..
 ```
 
@@ -62,23 +71,30 @@ cd ..
 You've been assigned to build a contact form.
 
 ```bash
-cd ~/git-exercises/ex10/my-repo
+cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/my-repo
 ```
 
 Create a feature branch:
 ```bash
 git checkout -b contact-form
+git status
 ```
 
 Build the feature (make a few commits like you would in real life):
 ```bash
 echo "<form><input type='text' placeholder='Name'></form>" > contact.html
 git add contact.html
+git status
+
 git commit -m "add contact form HTML"
+git status
 
 echo ".form-input { padding: 10px; }" >> styles.css
 git add styles.css
+git status
+
 git commit -m "add contact form styles"
+git status
 ```
 
 Check your progress:
@@ -94,14 +110,23 @@ You should see your `contact-form` branch ahead of `main`.
 While you're working, your coworker makes changes to main:
 
 ```bash
-cd ~/git-exercises/ex10/coworker-repo
+cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/coworker-repo
 echo "/* navigation styles */" >> styles.css
 git add styles.css
+git status
+
 git commit -m "add navigation styles"
+git status
+
 echo "<nav>Home | About | Contact</nav>" > nav.html
 git add nav.html
+git status
+
 git commit -m "add navigation HTML"
+git status
+
 git push origin main
+git status
 ```
 
 
@@ -113,8 +138,9 @@ You're in the middle of your contact form feature. You're NOT ready to commit.
 Let's say you've started editing but haven't committed yet:
 
 ```bash
-cd ~/git-exercises/ex10/my-repo
+cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/my-repo
 echo "// TODO: add form validation" >> app.js
+git status
 ```
 
 Your app.js has uncommitted changes. You need to deal with the hotfix.
@@ -128,22 +154,35 @@ git status
 Clean working directory. Now switch to main and fix the bug:
 ```bash
 git checkout main
+git status
+
 git checkout -b hotfix-crash
+git status
+
 echo "console.log('app started safely');" > app.js
 git add app.js
+git status
+
 git commit -m "fix app crash on startup"
+git status
 ```
 
 Merge the hotfix into main:
 ```bash
 git checkout main
+git status
+
 git merge hotfix-crash
+git status
+
 git branch -d hotfix-crash
+git status
 ```
 
 Push the fix:
 ```bash
 git push origin main
+git status
 ```
 
 
@@ -152,18 +191,23 @@ git push origin main
 Switch back to your feature branch:
 ```bash
 git checkout contact-form
+git status
 ```
 
 Get your stashed work back:
 ```bash
 git stash pop
+git status
 ```
 
 Your half-finished validation code is back in app.js. Finish it and commit:
 ```bash
 echo "function validateForm() { return true; }" >> app.js
 git add app.js
+git status
+
 git commit -m "add form validation"
+git status
 ```
 
 
@@ -174,6 +218,7 @@ the remote that you don't have on your feature branch.
 
 ```bash
 git fetch origin
+git status
 ```
 
 See what's new:
@@ -198,13 +243,19 @@ Let's rebase to put your feature commits on top of the latest main.
 First, update your local main:
 ```bash
 git checkout main
+git status
+
 git merge origin/main
+git status
 ```
 
 Now rebase your feature:
 ```bash
 git checkout contact-form
+git status
+
 git rebase main
+git status
 ```
 
 If there's a conflict (likely in styles.css or app.js since both branches
@@ -215,6 +266,7 @@ touched them):
 3. Keep the code you want (probably both changes combined)
 4. `git add` the resolved file(s)
 5. `git rebase --continue`
+6. `git status`
 
 Check the graph:
 ```bash
@@ -228,7 +280,10 @@ Your feature commits should be on top of main in a straight line.
 
 ```bash
 git checkout main
+git status
+
 git merge contact-form
+git status
 ```
 
 This should be a fast-forward (because you rebased).
@@ -243,6 +298,7 @@ Clean straight line.
 Push:
 ```bash
 git push origin main
+git status
 ```
 
 
@@ -251,6 +307,7 @@ git push origin main
 Delete the feature branch:
 ```bash
 git branch -d contact-form
+git status
 ```
 
 Verify only main remains:
@@ -287,13 +344,16 @@ on top of the coworker's changes and the hotfix.
 
 ## Do It Again
 
-The best way to make this stick is repetition. Delete everything and do this
-entire exercise again from scratch. Try to do it with fewer glances at the
-instructions each time.
+The best way to make this stick is repetition. Clean up the sub-repos and
+reset the exercise directory, then do this entire exercise again from scratch.
+Try to do it with fewer glances at the instructions each time.
 
 ```bash
-cd ~
-rm -rf ~/git-exercises/ex10
+cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/
+rm -rf remote my-repo coworker-repo
+git checkout main && git reset --hard
+git clean -fd
+git status
 ```
 
 Then start over from the top of this file.

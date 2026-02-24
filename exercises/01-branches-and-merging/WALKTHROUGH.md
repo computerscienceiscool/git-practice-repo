@@ -38,45 +38,51 @@ Nobody's code interferes with anyone else's.
 
 ## Setup
 
-Every exercise starts with a fresh repo so your history stays clean.
+Navigate to the exercise folder — it's already inside the practice repo:
 
 ```bash
-mkdir ~/git-exercises/ex01
-cd ~/git-exercises/ex01
-git init
+cd ~/lab/git/git-practice-repo/exercises/01-branches-and-merging
+git status
 ```
 
-You should see:
-```
-Initialized empty Git repository in /home/yourname/git-exercises/ex01/.git/
-```
+You should see you're on the `main` branch with a clean working tree.
 
 
-## Step 1: See That No Branches Exist Yet
+## Step 1: See What Branches Exist
 
 Run:
 ```bash
 git branch
 ```
 
-**What you'll see:** Nothing. A blank line.
-
-**Why:** Git doesn't show a branch until there's at least one commit. The branch
-exists in theory, but Git considers it unborn. This is a quirk — don't worry about
-it. Just know that you need at least one commit before `git branch` shows anything.
+**What you'll see:** `* main` — the `*` means you're currently on that branch.
 
 
 ## Step 2: Create Your First Commit
 
 ```bash
 echo "hello world" > hello.txt
+git status
+```
+
+**What you'll see:** `hello.txt` listed as an untracked file. Git sees the new
+file but isn't tracking it yet.
+
+```bash
 git add hello.txt
+git status
+```
+
+**What you'll see:** `hello.txt` is now under "Changes to be committed." It's
+staged and ready to go.
+
+```bash
 git commit -m "first commit"
 ```
 
 **What you'll see:**
 ```
-[main (root-commit) xxxxxxx] first commit
+[main xxxxxxx] first commit
  1 file changed, 1 insertion(+)
  create mode 100644 hello.txt
 ```
@@ -110,7 +116,13 @@ git checkout -b my-feature
 Switched to a new branch 'my-feature'
 ```
 
-Now run:
+Now check where you are:
+```bash
+git status
+```
+
+**What you'll see:** `On branch my-feature` — confirming you switched.
+
 ```bash
 git branch
 ```
@@ -131,7 +143,20 @@ same commit. Nothing has diverged. They're two bookmarks on the same page.
 
 ```bash
 echo "feature work" > feature.txt
+git status
+```
+
+**What you'll see:** `feature.txt` as an untracked file, and you're on branch
+`my-feature`.
+
+```bash
 git add feature.txt
+git status
+```
+
+**What you'll see:** `feature.txt` staged and ready to commit.
+
+```bash
 git commit -m "add feature work"
 ```
 
@@ -156,7 +181,10 @@ hasn't moved.
 
 ```bash
 git checkout main
+git status
 ```
+
+**What you'll see:** `On branch main` — you're back.
 
 Now check what files exist:
 ```bash
@@ -180,6 +208,7 @@ ls
 Switch back to main for the next step:
 ```bash
 git checkout main
+git status
 ```
 
 
@@ -218,6 +247,7 @@ fork, no merge commit.
 **Clean up the branch:**
 ```bash
 git branch -d my-feature
+git status
 ```
 
 
@@ -229,20 +259,24 @@ set that up.
 Create a new branch:
 ```bash
 git checkout -b new-feature
+git status
 ```
 
 Make a commit on the feature branch:
 ```bash
 echo "new feature code" > new-feature.txt
 git add new-feature.txt
+git status
 git commit -m "add new feature"
 ```
 
 Now switch to main AND make a commit there too:
 ```bash
 git checkout main
+git status
 echo "main has moved too" > main-update.txt
 git add main-update.txt
+git status
 git commit -m "update main"
 ```
 
@@ -284,6 +318,15 @@ Merge made by the 'ort' strategy.
 the 'ort' strategy." This means Git created a merge commit — a special commit
 that ties the two branches back together.
 
+**What is the 'ort' strategy?** "ort" stands for "Ostensibly Recursive's Twin."
+It's Git's default merge strategy (it replaced the older "recursive" strategy in
+Git 2.34+). It looks at three things: the common ancestor commit (where the
+branches split), your branch's changes, and the other branch's changes. Then it
+combines them. If both branches changed different files (like here), it just
+includes both. If both changed the same file in the same place, that's a merge
+conflict — which is Exercise 02. You don't need to pick a strategy. Git uses
+ort automatically.
+
 Check the graph:
 ```bash
 git log --oneline --all --graph
@@ -306,6 +349,7 @@ and `/` is the merge commit.
 **Clean up:**
 ```bash
 git branch -d new-feature
+git status
 ```
 
 
@@ -344,7 +388,13 @@ Answer these without looking back:
 
 ## Cleanup
 
+Remove the files created during this exercise and reset the repo:
+
 ```bash
-cd ~
-rm -rf ~/git-exercises/ex01
+git checkout main
+git reset --hard HEAD~4
+git clean -fd
+git status
 ```
+
+This resets your repo back to its original state before the exercise.

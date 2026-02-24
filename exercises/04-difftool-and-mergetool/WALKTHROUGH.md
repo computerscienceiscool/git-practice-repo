@@ -2,7 +2,7 @@
 
 ## What Are These?
 
-You already know `git diff` — it shows changes in your terminal as `+` and `-`
+You already know `git diff` -- it shows changes in your terminal as `+` and `-`
 lines. A **difftool** does the same thing but opens a visual side-by-side view
 in a program like vimdiff.
 
@@ -17,9 +17,8 @@ But visual tools can be faster once you're comfortable with them.
 ## Setup
 
 ```bash
-mkdir ~/git-exercises/ex04
-cd ~/git-exercises/ex04
-git init
+cd ~/lab/git/git-practice-repo/exercises/04-difftool-and-mergetool/
+git status
 ```
 
 Configure your tools (vimdiff is available on most Linux systems):
@@ -37,7 +36,9 @@ Create a starting file:
 ```bash
 echo "original content" > demo.txt
 git add demo.txt
+git status
 git commit -m "initial commit"
+git status
 ```
 
 
@@ -48,6 +49,7 @@ git commit -m "initial commit"
 Make a change without committing:
 ```bash
 echo "modified content" > demo.txt
+git status
 ```
 
 ### Step 2: Use git diff (Terminal Version)
@@ -85,6 +87,7 @@ If that doesn't work, press `Escape` twice, then `:qa!` and Enter.
 
 ```bash
 git checkout -- demo.txt
+git status
 ```
 
 ### Step 5: Compare Two Branches
@@ -92,14 +95,20 @@ git checkout -- demo.txt
 Create two branches with different changes:
 ```bash
 git checkout -b branch-x
+git status
 echo "version from branch-x" > demo.txt
 git add demo.txt
+git status
 git commit -m "branch-x change"
+git status
 
 git checkout main
+git status
 echo "version from main" > demo.txt
 git add demo.txt
+git status
 git commit -m "main change"
+git status
 ```
 
 Compare them:
@@ -133,25 +142,34 @@ committed BEFORE either branch edits it.
 ```bash
 echo "base version of the file" > conflict-demo.txt
 git add conflict-demo.txt
+git status
 git commit -m "add conflict demo file"
+git status
 ```
 
 Now create conflicting changes:
 ```bash
 git checkout -b branch-y
+git status
 echo "edited by branch-y" > conflict-demo.txt
 git add conflict-demo.txt
+git status
 git commit -m "branch-y edit"
+git status
 
 git checkout main
+git status
 echo "edited by main" > conflict-demo.txt
 git add conflict-demo.txt
+git status
 git commit -m "main edit"
+git status
 ```
 
 Try to merge:
 ```bash
 git merge branch-y
+git status
 ```
 
 **What you'll see:**
@@ -169,10 +187,10 @@ git mergetool
 
 **What you'll see:** Vimdiff opens with multiple panes:
 
-- **LOCAL** (left) — your current branch's version (main)
-- **REMOTE** (right) — the incoming branch's version (branch-y)
-- **BASE** (top center) — what the file looked like before either branch changed it
-- **MERGED** (bottom) — this is where you make your final decision
+- **LOCAL** (left) -- your current branch's version (main)
+- **REMOTE** (right) -- the incoming branch's version (branch-y)
+- **BASE** (top center) -- what the file looked like before either branch changed it
+- **MERGED** (bottom) -- this is where you make your final decision
 
 ### Step 8: Resolve in the Mergetool
 
@@ -189,7 +207,9 @@ When you're done editing the bottom pane, save and quit all:
 
 After the mergetool closes:
 ```bash
+git status
 git commit -m "resolved with mergetool"
+git status
 ```
 
 Check the graph:
@@ -205,6 +225,7 @@ git branch -d branch-y
 **Also clean up .orig files** (mergetool sometimes creates backup files):
 ```bash
 rm -f *.orig
+git status
 ```
 
 
@@ -219,7 +240,9 @@ The manual approach:
 2. Find the `<<<<<<<` markers
 3. Delete the markers and keep what you want
 4. `git add filename`
-5. `git commit`
+5. `git status`
+6. `git commit`
+7. `git status`
 
 
 ## Test Yourself
@@ -244,6 +267,9 @@ The manual approach:
 ## Cleanup
 
 ```bash
-cd ~
-rm -rf ~/git-exercises/ex04
+git checkout main
+git status
+git reset --hard
+git clean -fd
+git status
 ```

@@ -42,13 +42,18 @@ This exercise uses three separate repos to simulate a team:
 2. Your local repo
 3. A "coworker" repo
 
+These sub-repos will all live as subdirectories inside the exercise folder.
+
+```bash
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
+```
+
 ### Create the Remote
 
 ```bash
-mkdir -p ~/git-exercises/ex05
-cd ~/git-exercises/ex05
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
 mkdir remote-repo
-cd remote-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/remote-repo
 git init --bare
 ```
 
@@ -58,10 +63,11 @@ working files.
 ### Create Your Local Repo
 
 ```bash
-cd ~/git-exercises/ex05
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
 mkdir my-repo
-cd my-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/my-repo
 git init
+git status
 git remote add origin ../remote-repo
 ```
 
@@ -69,15 +75,19 @@ Make a first commit and push:
 ```bash
 echo "project start" > project.txt
 git add project.txt
+git status
 git commit -m "initial commit"
+git status
 git push origin main
+git status
 ```
 
 ### Create the Coworker's Repo
 
 ```bash
-cd ~/git-exercises/ex05
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
 git clone remote-repo coworker-repo
+git -C ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/coworker-repo status
 ```
 
 Now you have three repos:
@@ -89,11 +99,14 @@ Now you have three repos:
 ## Step 1: Coworker Makes a Change
 
 ```bash
-cd ~/git-exercises/ex05/coworker-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/coworker-repo
 echo "coworker added this" > coworker-file.txt
 git add coworker-file.txt
+git status
 git commit -m "coworker added a file"
+git status
 git push origin main
+git status
 ```
 
 Now the remote has a commit that YOUR repo doesn't know about yet.
@@ -103,7 +116,8 @@ Now the remote has a commit that YOUR repo doesn't know about yet.
 
 Go back to your repo:
 ```bash
-cd ~/git-exercises/ex05/my-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/my-repo
+git status
 ```
 
 First, check your graph:
@@ -114,6 +128,7 @@ git log --oneline --all --graph
 You should only see your initial commit. Now fetch:
 ```bash
 git fetch origin
+git status
 ```
 
 Check the graph again:
@@ -163,6 +178,7 @@ This shows commits that are on `origin/main` but not yet on your `main`.
 Now that you've looked and you're ready:
 ```bash
 git merge origin/main
+git status
 ```
 
 Check:
@@ -172,26 +188,35 @@ ls
 
 Now `coworker-file.txt` is there. Your main has caught up with the remote.
 
+```bash
+git log --oneline --all --graph
+```
+
 
 ## Step 5: See That Pull Does Both Steps at Once
 
 Let's have the coworker make another change:
 ```bash
-cd ~/git-exercises/ex05/coworker-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/coworker-repo
 echo "second change by coworker" > second-file.txt
 git add second-file.txt
+git status
 git commit -m "coworker second commit"
+git status
 git push origin main
+git status
 ```
 
 Go back to your repo:
 ```bash
-cd ~/git-exercises/ex05/my-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/my-repo
+git status
 ```
 
 This time, use pull:
 ```bash
 git pull origin main
+git status
 ```
 
 **What you'll see:** Git fetches AND merges in one step. `second-file.txt`
@@ -202,6 +227,10 @@ ls
 ```
 
 The file is there. No separate fetch and merge needed.
+
+```bash
+git log --oneline --all --graph
+```
 
 
 ## Step 6: When Fetch Matters — A Real Scenario
@@ -215,6 +244,7 @@ This is the scenario where fetch saves you:
 With fetch:
 ```bash
 git fetch origin
+git status
 git log main..origin/main --oneline
 ```
 
@@ -255,7 +285,12 @@ your uncommitted work, you're in trouble.
 
 ## Cleanup
 
+Remove the sub-repos created during this exercise, then reset the main repo:
+
 ```bash
-cd ~
-rm -rf ~/git-exercises/ex05
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
+rm -rf remote-repo coworker-repo my-repo
+git checkout main && git reset --hard
+git clean -fd
+git status
 ```

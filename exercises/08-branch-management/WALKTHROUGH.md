@@ -11,12 +11,16 @@ you're done.
 ## Setup
 
 ```bash
-mkdir ~/git-exercises/ex08
-cd ~/git-exercises/ex08
-git init
+cd ~/lab/git/git-practice-repo/exercises/08-branch-management/
+git status
+```
+
+```bash
 echo "start" > start.txt
 git add start.txt
+git status
 git commit -m "initial commit"
+git status
 ```
 
 
@@ -27,16 +31,22 @@ git commit -m "initial commit"
 Create a branch, do some work, and merge it:
 ```bash
 git checkout -b finished-feature
+git status
 echo "done" > done.txt
 git add done.txt
+git status
 git commit -m "finish the feature"
+git status
 git checkout main
+git status
 git merge finished-feature
+git status
 ```
 
 Now the branch has been merged. It's served its purpose. Delete it:
 ```bash
 git branch -d finished-feature
+git status
 ```
 
 **What you'll see:**
@@ -52,10 +62,14 @@ No complaints. Git knows the work is safe in main.
 Create a branch with work that ISN'T merged:
 ```bash
 git checkout -b unfinished-feature
+git status
 echo "not done yet" > wip.txt
 git add wip.txt
+git status
 git commit -m "work in progress"
+git status
 git checkout main
+git status
 ```
 
 Try to delete it:
@@ -77,6 +91,7 @@ delete it, that work is gone.
 If you're SURE you don't need the work:
 ```bash
 git branch -D unfinished-feature
+git status
 ```
 
 **What you'll see:**
@@ -104,14 +119,18 @@ there's unmerged work. Then you decide: merge it first, or force delete.
 
 ```bash
 git checkout -b old-name
+git status
 echo "test" > test.txt
 git add test.txt
+git status
 git commit -m "test commit"
+git status
 ```
 
 Rename it:
 ```bash
 git branch -m old-name better-name
+git status
 ```
 
 Check:
@@ -126,7 +145,9 @@ git branch
 If you're currently on a branch, you don't need to specify the old name:
 ```bash
 git checkout better-name
+git status
 git branch -m even-better-name
+git status
 ```
 
 Check:
@@ -137,7 +158,9 @@ git branch
 **Clean up:**
 ```bash
 git checkout main
+git status
 git branch -D even-better-name
+git status
 ```
 
 
@@ -166,17 +189,26 @@ These branches have work that hasn't been merged yet. Be careful deleting them.
 Let's test this. Create some branches:
 ```bash
 git checkout -b merged-one
+git status
 echo "m1" > m1.txt
 git add m1.txt
+git status
 git commit -m "merged one"
+git status
 git checkout main
+git status
 git merge merged-one
+git status
 
 git checkout -b not-merged-one
+git status
 echo "nm1" > nm1.txt
 git add nm1.txt
+git status
 git commit -m "not merged one"
+git status
 git checkout main
+git status
 ```
 
 Now check:
@@ -193,7 +225,9 @@ You should see `not-merged-one`.
 **Clean up:**
 ```bash
 git branch -d merged-one
+git status
 git branch -D not-merged-one
+git status
 ```
 
 
@@ -246,6 +280,10 @@ This finds all merged branches, excludes main, and deletes the rest.
 ## Cleanup
 
 ```bash
-cd ~
-rm -rf ~/git-exercises/ex08
+git checkout main
+git status
+git reset --hard
+git status
+git clean -fd
+git status
 ```
