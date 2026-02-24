@@ -12,6 +12,8 @@ you're done.
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/08-branch-management/
+mkdir work && cd work
+git init
 git status
 ```
 
@@ -280,10 +282,6 @@ This finds all merged branches, excludes main, and deletes the rest.
 ## Cleanup
 
 ```bash
-git checkout main
-git status
-git reset --hard
-git status
-git clean -fd
-git status
+cd ~/lab/git/git-practice-repo/exercises/08-branch-management/
+rm -rf work
 ```

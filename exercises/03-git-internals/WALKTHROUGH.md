@@ -13,6 +13,8 @@ Once you see this, branches will never feel mysterious again.
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/03-git-internals/
+mkdir work && cd work
+git init
 git status
 ```
 
@@ -262,9 +264,6 @@ branch is literally deleting a small text file. That's it.
 ## Cleanup
 
 ```bash
-git checkout main
-git status
-git reset --hard
-git clean -fd
-git status
+cd ~/lab/git/git-practice-repo/exercises/03-git-internals/
+rm -rf work
 ```

@@ -17,8 +17,12 @@ pick what you want to keep.
 
 ## Setup
 
+Create a fresh working directory with its own Git repo for this exercise:
+
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/02-merge-conflicts/
+mkdir work && cd work
+git init
 git status
 ```
 
@@ -318,10 +322,9 @@ again later when you're ready.
 
 ## Cleanup
 
+Remove the working directory created for this exercise:
+
 ```bash
-git checkout main
-git status
-git reset --hard
-git clean -fd
-git status
+cd ~/lab/git/git-practice-repo/exercises/02-merge-conflicts/
+rm -rf work
 ```

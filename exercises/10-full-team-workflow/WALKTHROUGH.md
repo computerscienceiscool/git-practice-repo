@@ -25,6 +25,7 @@ You work on a team. The project is a simple web app. You need to:
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/
+mkdir work && cd work
 ```
 
 ### The Remote (shared server)
@@ -71,7 +72,7 @@ cd ..
 You've been assigned to build a contact form.
 
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/my-repo
+cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/work/my-repo
 ```
 
 Create a feature branch:
@@ -110,7 +111,7 @@ You should see your `contact-form` branch ahead of `main`.
 While you're working, your coworker makes changes to main:
 
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/coworker-repo
+cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/work/coworker-repo
 echo "/* navigation styles */" >> styles.css
 git add styles.css
 git status
@@ -138,7 +139,7 @@ You're in the middle of your contact form feature. You're NOT ready to commit.
 Let's say you've started editing but haven't committed yet:
 
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/my-repo
+cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/work/my-repo
 echo "// TODO: add form validation" >> app.js
 git status
 ```
@@ -350,10 +351,7 @@ Try to do it with fewer glances at the instructions each time.
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/10-full-team-workflow/
-rm -rf remote my-repo coworker-repo
-git checkout main && git reset --hard
-git clean -fd
-git status
+rm -rf work
 ```
 
 Then start over from the top of this file.

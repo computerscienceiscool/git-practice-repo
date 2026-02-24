@@ -18,6 +18,8 @@ But visual tools can be faster once you're comfortable with them.
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/04-difftool-and-mergetool/
+mkdir work && cd work
+git init
 git status
 ```
 
@@ -267,9 +269,6 @@ The manual approach:
 ## Cleanup
 
 ```bash
-git checkout main
-git status
-git reset --hard
-git clean -fd
-git status
+cd ~/lab/git/git-practice-repo/exercises/04-difftool-and-mergetool/
+rm -rf work
 ```

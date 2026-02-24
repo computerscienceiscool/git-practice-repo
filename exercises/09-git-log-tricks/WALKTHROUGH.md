@@ -13,6 +13,8 @@ Let's get into our exercise folder and make sure we're starting clean:
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/09-git-log-tricks/
+mkdir work && cd work
+git init
 git status
 ```
 
@@ -319,12 +321,5 @@ git log --oneline main..origin/main
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/09-git-log-tricks/
-git checkout main
-git status
-
-git reset --hard
-git status
-
-git clean -fd
-git status
+rm -rf work
 ```

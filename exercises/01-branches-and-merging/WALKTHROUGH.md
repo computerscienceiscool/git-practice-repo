@@ -38,14 +38,14 @@ Nobody's code interferes with anyone else's.
 
 ## Setup
 
-Navigate to the exercise folder — it's already inside the practice repo:
+Create a fresh working directory with its own Git repo for this exercise:
 
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/01-branches-and-merging
+cd ~/lab/git/git-practice-repo/exercises/01-branches-and-merging/
+mkdir work && cd work
+git init
 git status
 ```
-
-You should see you're on the `main` branch with a clean working tree.
 
 
 ## Step 1: See What Branches Exist
@@ -55,7 +55,8 @@ Run:
 git branch
 ```
 
-**What you'll see:** `* main` — the `*` means you're currently on that branch.
+**What you'll see:** Nothing. A blank line. Git doesn't show a branch until
+there's at least one commit.
 
 
 ## Step 2: Create Your First Commit
@@ -388,13 +389,11 @@ Answer these without looking back:
 
 ## Cleanup
 
-Remove the files created during this exercise and reset the repo:
+Remove the working directory created for this exercise:
 
 ```bash
-git checkout main
-git reset --hard HEAD~4
-git clean -fd
-git status
+cd ~/lab/git/git-practice-repo/exercises/01-branches-and-merging/
+rm -rf work
 ```
 
 This resets your repo back to its original state before the exercise.

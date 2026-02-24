@@ -38,6 +38,8 @@ Common situations:
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/07-git-stash/
+mkdir work && cd work
+git init
 git status
 ```
 
@@ -343,10 +345,6 @@ The flow:
 ## Cleanup
 
 ```bash
-git checkout main
-git status
-git reset --hard
-git status
-git clean -fd
-git status
+cd ~/lab/git/git-practice-repo/exercises/07-git-stash/
+rm -rf work
 ```

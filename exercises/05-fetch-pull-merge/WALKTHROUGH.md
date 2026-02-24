@@ -42,18 +42,19 @@ This exercise uses three separate repos to simulate a team:
 2. Your local repo
 3. A "coworker" repo
 
-These sub-repos will all live as subdirectories inside the exercise folder.
+These sub-repos will all live inside a `work/` subdirectory of the exercise folder.
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
+mkdir work && cd work
 ```
 
 ### Create the Remote
 
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/
 mkdir remote-repo
-cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/remote-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/remote-repo
 git init --bare
 ```
 
@@ -63,9 +64,9 @@ working files.
 ### Create Your Local Repo
 
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/
 mkdir my-repo
-cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/my-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/my-repo
 git init
 git status
 git remote add origin ../remote-repo
@@ -85,9 +86,9 @@ git status
 ### Create the Coworker's Repo
 
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/
 git clone remote-repo coworker-repo
-git -C ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/coworker-repo status
+git -C ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/coworker-repo status
 ```
 
 Now you have three repos:
@@ -99,7 +100,7 @@ Now you have three repos:
 ## Step 1: Coworker Makes a Change
 
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/coworker-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/coworker-repo
 echo "coworker added this" > coworker-file.txt
 git add coworker-file.txt
 git status
@@ -116,7 +117,7 @@ Now the remote has a commit that YOUR repo doesn't know about yet.
 
 Go back to your repo:
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/my-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/my-repo
 git status
 ```
 
@@ -197,7 +198,7 @@ git log --oneline --all --graph
 
 Let's have the coworker make another change:
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/coworker-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/coworker-repo
 echo "second change by coworker" > second-file.txt
 git add second-file.txt
 git status
@@ -209,7 +210,7 @@ git status
 
 Go back to your repo:
 ```bash
-cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/my-repo
+cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/work/my-repo
 git status
 ```
 
@@ -285,12 +286,9 @@ your uncommitted work, you're in trouble.
 
 ## Cleanup
 
-Remove the sub-repos created during this exercise, then reset the main repo:
+Remove the working directory created for this exercise:
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/05-fetch-pull-merge/
-rm -rf remote-repo coworker-repo my-repo
-git checkout main && git reset --hard
-git clean -fd
-git status
+rm -rf work
 ```

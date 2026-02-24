@@ -41,6 +41,8 @@ But rebase has a rule you must follow. We'll get to that.
 
 ```bash
 cd ~/lab/git/git-practice-repo/exercises/06-rebase/
+mkdir work && cd work
+git init
 git status
 ```
 
@@ -297,10 +299,6 @@ reviewing it — use merge, not rebase.
 ## Cleanup
 
 ```bash
-git checkout main
-git status
-git reset --hard
-git status
-git clean -fd
-git status
+cd ~/lab/git/git-practice-repo/exercises/06-rebase/
+rm -rf work
 ```
